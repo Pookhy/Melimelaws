@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS personne (
 
 CREATE TABLE IF NOT EXISTS saison (
   id_Saison int(11) NOT NULL auto_increment,
-  num_Saison int(11) default NOT NULL,
+  num_Saison int(11) NOT NULL,
   photo_Saison varchar(255) NULL,
   PRIMARY KEY  (id_Saison)
 ) ENGINE InnoDB;
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS saison (
 
 CREATE TABLE IF NOT EXISTS video (
   id_Video int(11) NOT NULL auto_increment,
-  num_Video int(11) default NULL,
+  num_Video int(11) NOT NULL,
   titre_Video varchar(255) NOT NULL,
   description_Video text NOT NULL,
   adresse_Video varchar(255) NOT NULL,

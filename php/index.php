@@ -3,13 +3,6 @@
 require_once "php/dB/connectDb.php";
 require_once 'php/functions/AutoLoader.php';
 $loader = new AutoLoader;
-$loader->addNamespace("\Card", "php/card");
-$loader->addNamespace("\User", "php/user");
-$loader->addNamespace("\Form", "php/form");
-$loader->addNamespace("\Deck", "php/deck");
-$loader->addNamespace("\Display", "php/display");
-$loader->addNamespace("\Controller", "php/controller");
-$loader->addNamespace("\Comment", "php/comment");
 $loader->register();
 
 session_start();

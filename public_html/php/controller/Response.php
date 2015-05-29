@@ -12,6 +12,7 @@ class Response
     public function __construct($parts = array())
     {
         $this->parts = $parts;
+        $this->parts['squelette'] = "/ui/pages/home.html";
     }
 
     /**

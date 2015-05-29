@@ -3,6 +3,7 @@
 require_once "php/dB/connectDb.php";
 require_once 'php/functions/AutoLoader.php';
 $loader = new AutoLoader;
+$loader->addNameSpace("Controller", "php/controller");
 $loader->register();
 
 session_start();

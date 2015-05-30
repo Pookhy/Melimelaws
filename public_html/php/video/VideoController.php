@@ -4,6 +4,7 @@ namespace Video;
 
 class VideoController
 {
+
     private $db;
     private $request;
     private $response;
@@ -17,8 +18,8 @@ class VideoController
 
     public function home()
     {
-        $video = Video::initialize(array());
-        $content = VideoHtml::displayVideo($video);
+        $videos = Video::getVideosAccueil($this->db);
+        $content = VideoHtml::displayVideos($videos);
         $this->response->setPart("content", $content);
         return $this->response;
     }

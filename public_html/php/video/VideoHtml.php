@@ -6,7 +6,7 @@ class VideoHtml{
     public static function displayVideo($video){
         $html = '';
         $html .= <<<EOT
-               echo bonjour ezjfozejf fskdfsdlmfjskmfjsdfmsdjlfsdfmjslpsf "bonjour'jout'" 'jou'
+               affichage d'une video
 EOT;
         return $html;
     }

@@ -10,28 +10,91 @@ class Personne {
     protected $bio;
     protected $photo;
     protected $idConnexion;
-    protected $mdpConnection;
-    
-    public function __construct($id, $nom, $prenom, $bio, $photo, $idConnexion, $mdpConnection) {
+    protected $mdpConnexion;
+
+    public function __construct($id, $nom, $prenom, $bio, $photo, $idConnexion, $mdpConnexion) {
         $this->id = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->bio = $bio;
         $this->photo = $photo;
         $this->idConnexion = $idConnexion;
-        $this->mdpConnection = $mdpConnection;
+        $this->mdpConnexion = $mdpConnexion;
     }
 
-        public static function initialize($raw = array()) {
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getNom() {
+        return $this->nom;
+    }
+
+    public function getPrenom() {
+        return $this->prenom;
+    }
+
+    public function getBio() {
+        return $this->bio;
+    }
+
+    public function getPhoto() {
+        return $this->photo;
+    }
+
+    public function getIdConnexion() {
+        return $this->idConnexion;
+    }
+
+    public function getMdpConnexion() {
+        return $this->mdpConnexion;
+    }
+
+        
+    public static function initialize($raw = array()) {
         if (isset($raw['id_Personne']) && trim($raw['id_Personne']) != "") {
             $id = $raw['id_Personne'];
         } else {
             $id = null;
         }
 
+        if (isset($raw['nom_Personne']) && trim($raw['nom_Personne']) != "") {
+            $nom = $raw['nom_Personne'];
+        } else {
+            $nom = null;
+        }
+        
+        if (isset($raw['prenom_Personne']) && trim($raw['prenom_Personne']) != "") {
+            $prenom = $raw['prenom_Personne'];
+        } else {
+            $prenom = null;
+        }
+        
+        if (isset($raw['bio_Personne']) && trim($raw['bioid_Personne']) != "") {
+            $bio = $raw['bio_Personne'];
+        } else {
+            $bio = null;
+        }
+        
+        if (isset($raw['photo_Personne']) && trim($raw['photo_Personne']) != "") {
+            $photo = $raw['photo_Personne'];
+        } else {
+            $photo = null;
+        }
+        
+        if (isset($raw['id_Connexion']) && trim($raw['id_Connexion']) != "") {
+            $idConnexion = $raw['id_Connexion'];
+        } else {
+            $idConnexion = null;
+        }
+        
+        if (isset($raw['mdp_Connexion']) && trim($raw['mdp_Connexion']) != "") {
+            $mdpConnexion = $raw['mdp_Connexion'];
+        } else {
+            $mdpConnexion = null;
+        }
 
-
-        return new self($id, $nom, $prenom, $bio, $photo, $idConnexion, $mdpConnection);
+        return new self($id, $nom, $prenom, $bio, $photo, $idConnexion, $mdpConnexion);
     }
 
 }

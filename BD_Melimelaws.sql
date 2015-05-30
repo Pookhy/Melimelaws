@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS personne (
   prenom_Personne varchar(255) NOT NULL,
   bio_Personne text,
   photo_Personne varchar(255) NULL,
+  type_Personne enum('melimelaws','guest') NOT NULL
   id_Connexion varchar(10) NULL,
   mdp_Connexion varchar(15) NULL,
   PRIMARY KEY  (id_Personne)

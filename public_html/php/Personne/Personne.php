@@ -9,15 +9,17 @@ class Personne {
     protected $prenom;
     protected $bio;
     protected $photo;
+    protected $type;
     protected $idConnexion;
     protected $mdpConnexion;
 
-    public function __construct($id, $nom, $prenom, $bio, $photo, $idConnexion, $mdpConnexion) {
+    public function __construct($id, $nom, $prenom, $bio, $photo, $type, $idConnexion, $mdpConnexion) {
         $this->id = $id;
         $this->nom = $nom;
         $this->prenom = $prenom;
         $this->bio = $bio;
         $this->photo = $photo;
+        $this->type = $type;
         $this->idConnexion = $idConnexion;
         $this->mdpConnexion = $mdpConnexion;
     }
@@ -40,6 +42,10 @@ class Personne {
 
     public function getPhoto() {
         return $this->photo;
+    }
+
+    public function getType() {
+        return $this->type;
     }
 
     public function getIdConnexion() {
@@ -82,6 +88,12 @@ class Personne {
             $photo = null;
         }
         
+        if (isset($raw['type_Personne']) && trim($raw['type_Personne'])) {
+            $type = $raw['type_Personne'];
+        } else {
+            $type = null;
+        }
+        
         if (isset($raw['id_Connexion']) && trim($raw['id_Connexion'])) {
             $idConnexion = $raw['id_Connexion'];
         } else {
@@ -94,7 +106,7 @@ class Personne {
             $mdpConnexion = null;
         }
 
-        return new self($id, $nom, $prenom, $bio, $photo, $idConnexion, $mdpConnexion);
+        return new self($id, $nom, $prenom, $bio, $photo, $type, $idConnexion, $mdpConnexion);
     }
 
 }

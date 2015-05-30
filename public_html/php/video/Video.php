@@ -66,49 +66,49 @@ class Video
     }
     
     public static function initialize($raw = array()){
-        if(isset($raw['id_Video']) && trim($raw['id_Video']) != ""){
+        if(isset($raw['id_Video']) && trim($raw['id_Video'])){
             $id = $raw['id_Video'];            
         }else{
             $id = null;
         }
 
-        if(isset($raw['num_Video']) && trim($raw['num_Video']) != ""){
+        if(isset($raw['num_Video']) && trim($raw['num_Video'])){
             $num = $raw['num_Video'];            
         }else{
             $num = null;
         }
 
-        if(isset($raw['titre_Video']) && trim($raw['titre_Video']) != ""){
+        if(isset($raw['titre_Video']) && trim($raw['titre_Video'])){
             $titre = $raw['titre_Video'];            
         }else{
             $titre = null;
         }
 
-        if(isset($raw['description_Video']) && trim($raw['description_Video']) != ""){
+        if(isset($raw['description_Video']) && trim($raw['description_Video'])){
             $description = $raw['description_Video'];            
         }else{
             $description = null;
         }
 
-        if(isset($raw['adresse_Video']) && trim($raw['adresse_Video']) != ""){
+        if(isset($raw['adresse_Video']) && trim($raw['adresse_Video'])){
             $adresse = $raw['adresse_Video'];            
         }else{
             $adresse = null;
         }
 
-        if(isset($raw['type_Video']) && trim($raw['type_Video']) != ""){
+        if(isset($raw['type_Video']) && trim($raw['type_Video'])){
             $type = $raw['type_Video'];            
         }else{
             $type = null;
         }
 
-        if(isset($raw['accueil_Video']) && trim($raw['accueil_Video']) != ""){
+        if(isset($raw['accueil_Video']) && trim($raw['accueil_Video'])){
             $accueil = $raw['accueil_Video'];            
         }else{
             $accueil = null;
         }
 
-        if(isset($raw['id_Saison']) && trim($raw['id_Saison']) != ""){
+        if(isset($raw['id_Saison']) && trim($raw['id_Saison'])){
             $idSaison = $raw['id_Saison'];            
         }else{
             $idSaison = null;

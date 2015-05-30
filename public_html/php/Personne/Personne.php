@@ -52,43 +52,43 @@ class Personne {
 
         
     public static function initialize($raw = array()) {
-        if (isset($raw['id_Personne']) && trim($raw['id_Personne']) != "") {
+        if (isset($raw['id_Personne']) && trim($raw['id_Personne'])) {
             $id = $raw['id_Personne'];
         } else {
             $id = null;
         }
 
-        if (isset($raw['nom_Personne']) && trim($raw['nom_Personne']) != "") {
+        if (isset($raw['nom_Personne']) && trim($raw['nom_Personne'])) {
             $nom = $raw['nom_Personne'];
         } else {
             $nom = null;
         }
         
-        if (isset($raw['prenom_Personne']) && trim($raw['prenom_Personne']) != "") {
+        if (isset($raw['prenom_Personne']) && trim($raw['prenom_Personne'])) {
             $prenom = $raw['prenom_Personne'];
         } else {
             $prenom = null;
         }
         
-        if (isset($raw['bio_Personne']) && trim($raw['bioid_Personne']) != "") {
+        if (isset($raw['bio_Personne']) && trim($raw['bioid_Personne'])) {
             $bio = $raw['bio_Personne'];
         } else {
             $bio = null;
         }
         
-        if (isset($raw['photo_Personne']) && trim($raw['photo_Personne']) != "") {
+        if (isset($raw['photo_Personne']) && trim($raw['photo_Personne'])) {
             $photo = $raw['photo_Personne'];
         } else {
             $photo = null;
         }
         
-        if (isset($raw['id_Connexion']) && trim($raw['id_Connexion']) != "") {
+        if (isset($raw['id_Connexion']) && trim($raw['id_Connexion'])) {
             $idConnexion = $raw['id_Connexion'];
         } else {
             $idConnexion = null;
         }
         
-        if (isset($raw['mdp_Connexion']) && trim($raw['mdp_Connexion']) != "") {
+        if (isset($raw['mdp_Connexion']) && trim($raw['mdp_Connexion'])) {
             $mdpConnexion = $raw['mdp_Connexion'];
         } else {
             $mdpConnexion = null;

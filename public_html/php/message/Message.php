@@ -34,25 +34,25 @@ class Message
 
         
     public static function initialize($raw = array()){
-        if(isset($raw['id_Message']) && trim($raw['id_Message']) != ""){
+        if(isset($raw['id_Message']) && trim($raw['id_Message'])){
             $id = $raw['id_Message'];            
         }else{
             $id = null;
         }
         
-        if(isset($raw['date_Message']) && trim($raw['date_Message']) != ""){
+        if(isset($raw['date_Message']) && trim($raw['date_Message'])){
             $date = $raw['date_Message'];            
         }else{
             $date = null;
         }
         
-        if(isset($raw['contenu_Message']) && trim($raw['contenu_Message']) != ""){
+        if(isset($raw['contenu_Message']) && trim($raw['contenu_Message'])){
             $contenu = $raw['contenu_Message'];            
         }else{
             $contenu = null;
         }
 
-        if(isset($raw['id_Personne']) && trim($raw['id_Personne']) != ""){
+        if(isset($raw['id_Personne']) && trim($raw['id_Personne'])){
             $idPersonne = $raw['id_Saison'];            
         }else{
             $idPersonne = null;

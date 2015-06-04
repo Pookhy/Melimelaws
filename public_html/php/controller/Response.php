@@ -13,6 +13,8 @@ class Response
     {
         $this->parts = $parts;
         $this->parts['squelette'] = "/ui/pages/home.html";
+        $this->parts['header'] = \Display\Display::displayHeader();
+        $this->parts['footer'] = \Display\Display::displayFooter();
     }
 
     /**

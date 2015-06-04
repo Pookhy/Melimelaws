@@ -2,9 +2,9 @@
 
 include "infoDb.php";
 
-//try {
+try {
     $db = new PDO($dsn, $user, $pass);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
-//} catch (PDOException $ex) {
-//    echo $ex->getMessage();
-//}
+//    $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $ex) {
+    echo $ex->getMessage();
+}

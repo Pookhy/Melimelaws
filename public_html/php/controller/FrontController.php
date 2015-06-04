@@ -14,7 +14,7 @@ class FrontController
         try {
             $t = $request->getGetParam("t");
         } catch (\Exception $ex) {
-            $t = 'video';
+            $t = 'saison';
         }
         try {
             $this->action = $request->getGetParam("action");

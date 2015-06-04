@@ -17,8 +17,9 @@ class SaisonController
 
     public function home()
     {
-        $video = Video::initialize(array());
-        $content = VideoHtml::displayVideo($video);
+        $saison = SaisonDb::getAllSaisons($this->db);
+        $content = SaisonHtml::displaySaisons($saison);
+        
         $this->response->setPart("content", $content);
         return $this->response;
     }

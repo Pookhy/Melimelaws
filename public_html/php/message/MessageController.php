@@ -1,10 +1,9 @@
 <?php
 
-namespace Video;
+namespace Message;
 
-class VideoController
+class MessageController
 {
-
     private $db;
     private $request;
     private $response;
@@ -18,8 +17,8 @@ class VideoController
 
     public function home()
     {
-        $videos = Video::getVideosAccueil($this->db);
-        $content = VideoHtml::displayVideos($videos);
+        $message = Message::initialize(array());
+        $content = MessageHtml::displayMessage($message);
         $this->response->setPart("content", $content);
         return $this->response;
     }

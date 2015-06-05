@@ -4,8 +4,17 @@
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link type="text/css" href="ui/css/style.css" rel="stylesheet"/>
     </head>
     <body>
-        <div><?php echo $infos->getPart('content'); ?></div>
+        <header>
+            <?php echo $infos->getPart("header"); ?>
+        </header>
+        <div>
+            <?php echo $infos->getPart('content'); ?>
+        </div>
+        <footer>
+            <?php echo $infos->getPart("footer");?>
+        </footer>
     </body>
 </html>

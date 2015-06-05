@@ -1,10 +1,9 @@
 <?php
 
-namespace Video;
+namespace Saison;
 
-class VideoController
+class SaisonController
 {
-
     private $db;
     private $request;
     private $response;
@@ -18,8 +17,9 @@ class VideoController
 
     public function home()
     {
-        $videos = Video::getVideosAccueil($this->db);
-        $content = VideoHtml::displayVideos($videos);
+        $saison = SaisonDb::getAllSaisons($this->db);
+        $content = SaisonHtml::displaySaisons($saison);
+        
         $this->response->setPart("content", $content);
         return $this->response;
     }

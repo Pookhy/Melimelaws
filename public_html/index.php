@@ -1,12 +1,14 @@
 <?php
 
-//require_once "php/dB/connectDb.php";
+require_once "php/dB/connectDb.php";
 require_once "php/functions/AutoLoader.php";
 $loader = new AutoLoader;
 $loader->addNameSpace("Controller", "php/controller");
 $loader->addNameSpace("Video", "php/video");
+$loader->addNameSpace("Personne", "php/personne");
+$loader->addNameSpace("Saison", "php/saison");
+$loader->addNameSpace("Display", "php/display");
 $loader->register();
-$db = "";
 
 session_start();
 $response = new Controller\Response();

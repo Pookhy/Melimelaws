@@ -1,8 +1,8 @@
 <?php
 
-namespace Video;
+namespace Personne;
 
-class VideoController
+class PersonneController
 {
     private $db;
     private $request;
@@ -15,12 +15,36 @@ class VideoController
         $this->db = $db;
     }
 
-    public function home()
+    public function allPersonne()
     {
-        $personne = Personne::initialize(array());
-        $content = PersonneHtml::displayPersonne($personne);
+        $personnes = Personne::initialize(array());
+        $content = PersonneHtml::displayPersonne($personnes);
         $this->response->setPart("content", $content);
         return $this->response;
+    }
+    
+    public function allEquipe()
+    {
+        $personnes = PersonneDb::getEquipes($this->db);
+        var_dump($personnes);
+        $content = PersonneHtml::displayPersonnes($personnes);
+        $this->response->setPart("content", $content);
+        return $this->response;
+    }
+    
+    public function allGuest()
+    {
+        $personnes = PersonneDb::getGuest($this->db);
+        $content = PersonneHtml::displayPersonne($personnes);
+        $this->response->setPart("content", $content);
+        return $this->response;
+    }
+    
+    public function diffEquipe()
+    {
+        $content = PersonneHtml::displayChoixTypePersonne();
+        $this->response->setPart("content", $content);
+        return $this->response; 
     }
 
 }

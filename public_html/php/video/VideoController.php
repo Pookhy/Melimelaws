@@ -18,7 +18,7 @@ class VideoController
 
     public function home()
     {
-        $videos = Video::getVideosAccueil($this->db);
+        $videos = VideoDb::getVideosAccueil($this->db);
         $content = VideoHtml::displayVideos($videos);
         $this->response->setPart("content", $content);
         return $this->response;

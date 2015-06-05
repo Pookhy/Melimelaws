@@ -2,99 +2,116 @@
 
 namespace Video;
 
-class VideoDb
-{
+class VideoDb {
 
-    public static function getVideosAccueil($db)
-    {
+    public static function getVideosAccueil($db) {
         $query = " SELECT * "
-                . "FROM video "
-                . "WHERE accueil = True";
+                . " FROM video "
+                . " WHERE accueil_Video = True ";
 
         $statement = $db->prepare($query);
-        $statement = execute();
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        try {
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($results as $result) {
-            $videos[] = Video::initialize($result);
+            foreach ($results as $result) {
+                $videos[] = Video::initialize($result);
+            }
+
+            return $videos;
+        } catch (\PDOException $ex) {
+            return false;
         }
-
-        return $videos;
     }
-    
-    public static function getAllEpisodes($db)
-    {
+
+    public static function getAllEpisodes($db) {
         $query = " SELECT * "
-                . "FROM video"
-                . "WHERE type_Video = 'episode'"
-                . "ORDER BY id_Saison";
+                . " FROM video "
+                . " WHERE type_Video = 'episode' "
+                . " ORDER BY id_Saison ";
 
         $statement = $db->prepare($query);
-        $statement = execute();
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($results as $result) {
-            $videos[] = Video::initialize($result);
+
+        try {
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            foreach ($results as $result) {
+                $videos[] = Video::initialize($result);
+            }
+
+            return $videos;
+        } catch (\PDOException $ex) {
+            return false;
         }
-
-        return $videos;
     }
-    
-    public static function getEpisodesSaison($db, $numSaison)
-    {
+
+    public static function getEpisodesSaison($db, $numSaison) {
         $query = " SELECT * "
-                . "FROM video INNER JOIN saison ON video.id_Saison = saison.id_Saison"
-                . "WHERE type_Video = 'episode'"
-                . "AND num_Saison='".$numSaison."'"
-                . "ORDER BY num_Video";
+                . " FROM video INNER JOIN saison ON video.id_Saison = saison.id_Saison "
+                . " WHERE type_Video = 'episode' "
+                . " AND num_Saison= :numSaison "
+                . " ORDER BY num_Video ";
 
         $statement = $db->prepare($query);
-        $statement = execute();
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        $statement->bindValue(":numSaison", $numSaison);
+        try {
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($results as $result) {
-            $videos[] = Video::initialize($result);
+            foreach ($results as $result) {
+                $videos[] = Video::initialize($result);
+            }
+
+            return $videos;
+        } catch (\PDOException $ex) {
+            return false;
         }
-
-        return $videos;
     }
-    
-    
-    public static function getAllBonus($db)
-    {
+
+    public static function getAllBonus($db) {
         $query = " SELECT * "
                 . "FROM video"
                 . "WHERE type_Video = 'bonus'"
                 . "ORDER BY id_Saison";
 
         $statement = $db->prepare($query);
-        $statement = execute();
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        try {
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($results as $result) {
-            $videos[] = Video::initialize($result);
+            foreach ($results as $result) {
+                $videos[] = Video::initialize($result);
+            }
+
+            return $videos;
+        } catch (\PDOException $ex) {
+            return false;
         }
-
-        return $videos;
     }
-    
-    public static function getBonusSaison($db, $numSaison)
-    {
+
+    public static function getBonusSaison($db, $numSaison) {
         $query = " SELECT * "
                 . "FROM video INNER JOIN saison ON video.id_Saison = saison.id_Saison"
                 . "WHERE type_Video = 'bonus'"
-                . "AND num_Saison='".$numSaison."'"
+                . "AND num_Saison= :numSaison"
                 . "ORDER BY num_Video";
 
         $statement = $db->prepare($query);
-        $statement = execute();
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        $statement->bindValue(":numSaison", $numSaison);
+        try {
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($results as $result) {
-            $videos[] = Video::initialize($result);
+            foreach ($results as $result) {
+                $videos[] = Video::initialize($result);
+            }
+
+            return $videos;
+        } catch (\PDOException $ex) {
+            return false;
         }
-
-        return $videos;
     }
 
 }

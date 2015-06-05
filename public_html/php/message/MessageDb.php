@@ -2,58 +2,48 @@
 
 namespace Message;
 
-class SaisonDb
-{    
-    public static function getAllMessages($db)
-    {
+class SaisonDb {
+
+    public static function getAllMessages($db) {
         $query = " SELECT * "
-                . "FROM message"
-                . "ORDER BY date_Message";
+                . " FROM message "
+                . " ORDER BY date_Message ";
 
         $statement = $db->prepare($query);
-        $statement = execute();
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        try {
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($results as $result) {
-            $messages[] = Video::initialize($result);
+            foreach ($results as $result) {
+                $messages[] = Video::initialize($result);
+            }
+
+            return $messages;
+        } catch (\PDOException $ex) {
+            return false;
         }
-
-        return $messages;
     }
-    
-    public static function getUnMessage($db)
-    {
+
+    public static function getXMessages($db, $nb) {
         $query = " SELECT * "
-                . "FROM message"
-                . "ORDER BY date_Message"
-                . "LIMIT 1";
+                . " FROM message "
+                . " ORDER BY date_Message "
+                . " LIMIT :nbMessage";
 
         $statement = $db->prepare($query);
-        $statement = execute();
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        $statement->bindValue(":nbMessage", $nb);
+        try {
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($results as $result) {
-            $messages[] = Video::initialize($result);
+            foreach ($results as $result) {
+                $messages[] = Video::initialize($result);
+            }
+
+            return $messages;
+        } catch (\PDOException $ex) {
+            return false;
         }
-
-        return $messages;
     }
-    
-    public static function getQuatreMessages($db)
-    {
-        $query = " SELECT * "
-                . "FROM message"
-                . "ORDER BY date_Message"
-                . "LIMIT 4";
 
-        $statement = $db->prepare($query);
-        $statement = execute();
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
-        foreach ($results as $result) {
-            $messages[] = Video::initialize($result);
-        }
-
-        return $messages;
-    }
 }

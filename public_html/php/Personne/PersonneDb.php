@@ -2,42 +2,46 @@
 
 namespace Personne;
 
-class PersonneDb
-{
-    public static function getEquipes($db)
-    {
+class PersonneDb {
+
+    public static function getEquipes($db) {
         $query = " SELECT * "
-                . "FROM personne "
-                . "WHERE type = 'melimelaws'";
+                . " FROM personne "
+                . " WHERE type_Personne = 'melimelaws' ";
 
         $statement = $db->prepare($query);
-        $statement = execute();
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        try {
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($results as $result) {
-            $melimelaws[] = Video::initialize($result);
+            foreach ($results as $result) {
+                $melimelaws[] = Personne::initialize($result);
+            }
+
+            return $melimelaws;
+        } catch (\PDOException $ex) {
+            return false;
         }
-
-        return $melimelaws;
     }
-    
-    public static function getGuest($db)
-    {
+
+    public static function getGuest($db) {
         $query = " SELECT * "
-                . "FROM personne "
-                . "WHERE type = 'guest'";
+                . " FROM personne "
+                . " WHERE type_Personne = 'guest' ";
 
         $statement = $db->prepare($query);
-        $statement = execute();
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        try {
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($results as $result) {
-            $guest[] = Video::initialize($result);
+            foreach ($results as $result) {
+                $guest[] = Personne::initialize($result);
+            }
+
+            return $guest;
+        } catch (\PDOException $ex) {
+            return false;
         }
-
-        return $guest;
     }
-    
-    
 
 }

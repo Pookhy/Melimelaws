@@ -76,7 +76,7 @@ class Personne {
             $prenom = null;
         }
         
-        if (isset($raw['bio_Personne']) && trim($raw['bioid_Personne'])) {
+        if (isset($raw['bio_Personne']) && trim($raw['bio_Personne'])) {
             $bio = $raw['bio_Personne'];
         } else {
             $bio = null;

@@ -15,10 +15,12 @@ class MessageController
         $this->db = $db;
     }
 
-    public function home()
+    public function allMessage()
     {
+        $nb=4;
         $message = Message::initialize(array());
-        $content = MessageHtml::displayMessage($message);
+        $content = MessageHtml::getXMessages($message,$nb);
+        
         $this->response->setPart("content", $content);
         return $this->response;
     }

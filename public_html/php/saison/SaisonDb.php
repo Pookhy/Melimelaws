@@ -2,37 +2,42 @@
 
 namespace Saison;
 
-class SaisonDb
-{
+class SaisonDb {
 
-    public static function getAllSaisons($db)
-    {
+    public static function getAllSaisons($db) {
         $query = " SELECT * "
-                . "FROM saison ORDER BY num_Saison ASC";
+                . " FROM saison ORDER BY num_Saison ASC";
 
         $statement = $db->prepare($query);
-        $statement->execute();
-        $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+        try {
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-        foreach ($results as $result) {
-            $saisons[] = Saison::initialize($result);
+            foreach ($results as $result) {
+                $saisons[] = Saison::initialize($result);
+            }
+
+            return $saisons;
+        } catch (\PDOException $ex) {
+            return false;
         }
-
-        return $saisons;
     }
 
-    public static function getSaison($db, $numSaison)
-    {
+    public static function getSaison($db, $numSaison) {
         $query = " SELECT * "
                 . "FROM saison "
                 . "WHERE num_Saison=:numSaison";
         $statement = $db->prepare($query);
         $statement->bindValue(":numSaison", $numSaison);
-        $statement->execute();
-        $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
-        $saison = isset($result[0]) ? Saison::initialize($result[0]) : false;
+        try {
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $saison = isset($result[0]) ? Saison::initialize($result[0]) : false;
 
-        return $saison;
+            return $saison;
+        } catch (\PDOException $ex) {
+            return false;
+        }
     }
 
 }

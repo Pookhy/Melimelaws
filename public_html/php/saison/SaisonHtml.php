@@ -10,8 +10,10 @@ class SaisonHtml
         $html = '';
         $html .= <<<EOT
             <div class="saison">
-                <img alt="" src="{$saison->getPhoto()}"/><br/>
-                <span class="saisonTitle">Saison {$saison->getNum()}</span>
+                <a href="index.php?t=saison&action=voirSaison&id={$saison->getId()}">
+                    <span class="saisonTitle">Saison {$saison->getNum()}</span>
+                    <img alt="" src="{$saison->getPhoto()}"/><br/>
+                </a>
             </div>
 EOT;
         return $html;

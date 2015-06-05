@@ -15,7 +15,7 @@ class SaisonController
         $this->db = $db;
     }
 
-    public function home()
+    public function allSaisons()
     {
         $saison = SaisonDb::getAllSaisons($this->db);
         $content = SaisonHtml::displaySaisons($saison);
@@ -24,4 +24,12 @@ class SaisonController
         return $this->response;
     }
 
+    public function voirSaison()
+    {
+        $id = $this->request->getGetParam("id");
+        $videos = \Video\VideoDb::getEpisodesSaison($this->db, $id);
+        $content = \Video\VideoHtml::displayVideos($videos);
+        $this->response->setPart("content", $content);
+        return $this->response;
+    }
 }

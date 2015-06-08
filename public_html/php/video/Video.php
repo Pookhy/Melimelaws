@@ -65,6 +65,38 @@ class Video
         return $this->idSaison;
     }
     
+    public function setId($id) {
+        $this->id = $id;
+    }
+
+    public function setNum($num) {
+        $this->num = $num;
+    }
+
+    public function setTitre($titre) {
+        $this->titre = $titre;
+    }
+
+    public function setDescription($description) {
+        $this->description = $description;
+    }
+
+    public function setAdresse($adresse) {
+        $this->adresse = $adresse;
+    }
+
+    public function setType($type) {
+        $this->type = $type;
+    }
+
+    public function setAccueil($accueil) {
+        $this->accueil = $accueil;
+    }
+
+    public function setIdSaison($idSaison) {
+        $this->idSaison = $idSaison;
+    }
+    
     public static function initialize($raw = array()){
         if(isset($raw['id_Video']) && trim($raw['id_Video'])){
             $id = $raw['id_Video'];            

@@ -34,5 +34,51 @@ EOT;
 
         return $html;
     }
+    
+    public static function insertVideo() {
+        //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
+        
+        $html = '';
+        $html .= <<<EOT
+            <div class="insert">
+                <form action ="" method="post">
+                    <fieldset>
+                        <legend> Vidéo </legend>
+                            <label for"num">Numéro :</label> 
+                            <input id="num" type="text" name="num">
+                            <br/>
+                            <label for"titre">Titre :</label>
+                            <input id="titre" type="text" name="titre">
+                            <br/>
+                            <label for"desc">Description :</label> 
+                            <input id="desc" type="text" name="desc">
+                            <br/>
+                            <label for"adr">Adresse YouTub :</label> 
+                            <input id="adr" type="text" name="adr">
+                            <br/>
+                            <label for"type">Type :</label> 
+                            <select id="type" type="text" name="type">
+                                <option value=""></otpion>
+                            </select>
+                            <br/>
+                            <label for"accueil">Visible sur l'accueil :</label> 
+                            <select id="accueil" type="text" name="accueil">
+                                <option value="0">Oui</otpion>
+                                <option value="1" default>Non</otpion>
+                            </select>
+                            <br/>
+                            <label for"idSaison">Saison :</label> 
+                            <select id="idSaison" type="text" name="idSaison">
+                                <option value=""></otpion>
+                            </select>
+                            <br/>
+                            <br/>
+                            <input type="submit" value="valider" />                 
+                    </fieldset>
+                </form>
+            </div>
+EOT;
+        return $html;
+    }
 
 }

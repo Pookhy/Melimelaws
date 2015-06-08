@@ -113,5 +113,42 @@ class VideoDb {
             return false;
         }
     }
+    
+    public static function insertVideo($db, $formulaire) {
+        //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
+        if( (isset($_POST["num"])&& !empty($_POST["num"])) 
+            && (isset($_POST["titre"])&& !empty($_POST["titre"])) )
+        {
+            $_POST["num"]=htmlspecialchars($_POST["num"]);
+            $num = $_POST["num"];
+            
+            $_POST["titre"]=htmlspecialchars($_POST["titre"]);
+            $titre = $_POST["titre"];
+            
+            $_POST["desc"]=htmlspecialchars($_POST["desc"]);
+            $description = $_POST["desc"];
+            
+            $_POST["adr"]=htmlspecialchars($_POST["adr"]);
+            $adresse = $_POST["adr"];
+        
+            $query = " INSERT INTO video "
+                    ." VALUES ('', :) ";
+            
+            try {
+                $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+                foreach ($results as $result) {
+                    $videos[] = Video::initialize($result);
+                }
+
+                return $videos;
+            } catch (\PDOException $ex) {
+                return false;
+            }
+        }
+        else{
+            //message d'erreur
+        }
+    }
 
 }

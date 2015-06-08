@@ -9,7 +9,7 @@ class Display
     {
         $html = <<<EOT
             <a href="./">
-                <img alt="" src="logo.png" />
+                <img alt="accueil" src="logo.png" />
                 logo
             </a>
             <nav id="mainMenu">
@@ -27,8 +27,22 @@ class Display
                     <a href="index.php?t=display&action=displayContact">Contact</a>
                     </li>
                 </ul>
-            </nav>            
-
+            </nav> 
+                
+            <div id="lien">
+                <a href="#">
+                    <img alt="page Facebook" src="logo_Facebook.png" />
+                </a>
+                <a href="#">
+                    <img alt="page Twitter" src="logo_Twitter.png" />
+                </a>
+                <a href="#">
+                    <img alt="page Ullule" src="logo_Ullule.png" />
+                </a>
+                <a href="#">
+                    <img alt="page Youtube" src="logo_Youtube.png" />
+                </a>
+            </div>
 EOT;
         return $html;
     }

@@ -12,6 +12,7 @@ class Video
     protected $type;
     protected $accueil;
     protected $idSaison;
+    protected $numSaison;
 
     public function __construct($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison)
     {
@@ -23,6 +24,14 @@ class Video
         $this->type = $type;
         $this->accueil = $accueil;
         $this->idSaison = $idSaison;
+        $this->numSaison = $numSaison;
+    }
+    public function getNumSaison() {
+        return $this->numSaison;
+    }
+
+    public function setNumSaison($numSaison) {
+        $this->numSaison = $numSaison;
     }
 
     public function getId()
@@ -98,50 +107,50 @@ class Video
     }
     
     public static function initialize($raw = array()){
-        if(isset($raw['id_Video']) && trim($raw['id_Video'])){
-            $id = $raw['id_Video'];            
+        if(isset($raw['id']) && trim($raw['id'])){
+            $id = $raw['id'];            
         }else{
             $id = null;
         }
 
-        if(isset($raw['num_Video']) && trim($raw['num_Video'])){
-            $num = $raw['num_Video'];            
+        if(isset($raw['num']) && trim($raw['num'])){
+            $num = $raw['num'];            
         }else{
             $num = null;
         }
 
-        if(isset($raw['titre_Video']) && trim($raw['titre_Video'])){
-            $titre = $raw['titre_Video'];            
+        if(isset($raw['titre']) && trim($raw['titre'])){
+            $titre = $raw['titre'];            
         }else{
             $titre = null;
         }
 
-        if(isset($raw['description_Video']) && trim($raw['description_Video'])){
-            $description = $raw['description_Video'];            
+        if(isset($raw['description']) && trim($raw['description'])){
+            $description = $raw['description'];            
         }else{
             $description = null;
         }
 
-        if(isset($raw['adresse_Video']) && trim($raw['adresse_Video'])){
-            $adresse = $raw['adresse_Video'];            
+        if(isset($raw['adresse']) && trim($raw['adresse'])){
+            $adresse = $raw['adresse'];            
         }else{
             $adresse = null;
         }
 
-        if(isset($raw['type_Video']) && trim($raw['type_Video'])){
-            $type = $raw['type_Video'];            
+        if(isset($raw['type']) && trim($raw['type'])){
+            $type = $raw['type'];            
         }else{
             $type = null;
         }
 
-        if(isset($raw['accueil_Video']) && trim($raw['accueil_Video'])){
-            $accueil = $raw['accueil_Video'];            
+        if(isset($raw['accueil']) && trim($raw['accueil'])){
+            $accueil = $raw['accueil'];            
         }else{
             $accueil = null;
         }
 
-        if(isset($raw['id_Saison']) && trim($raw['id_Saison'])){
-            $idSaison = $raw['id_Saison'];            
+        if(isset($raw['idSaison']) && trim($raw['idSaison'])){
+            $idSaison = $raw['idSaison'];            
         }else{
             $idSaison = null;
         }

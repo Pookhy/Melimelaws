@@ -24,6 +24,48 @@ class VideoDb {
         }
     }
 
+    public static function getVideo($db, $id) {
+        $query = " SELECT * "
+                . " FROM video "
+                . " WHERE id_Video = :id ";
+
+        $statement = $db->prepare($query);
+        $statement->bindValue(":id", $id);
+
+        try {
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            $video = Video::initialize($result);
+
+            return $video;
+        } catch (\PDOException $ex) {
+            return false;
+        }
+    }
+
+    public static function getAllVideos($db) {
+        $query = " SELECT * "
+                . " FROM video "
+                . " ORDER BY id_Saison ";
+
+        $statement = $db->prepare($query);
+
+
+        try {
+            $statement->execute();
+            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+            foreach ($results as $result) {
+                $videos[] = Video::initialize($result);
+            }
+
+            return $videos;
+        } catch (\PDOException $ex) {
+            return false;
+        }
+    }
+
     public static function getAllEpisodes($db) {
         $query = " SELECT * "
                 . " FROM video "
@@ -113,41 +155,43 @@ class VideoDb {
             return false;
         }
     }
-    
-    public static function insertVideo($db, $formulaire) {
+
+    public static function insertVideo($db, $video) {
         //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
-        if( (isset($_POST["num"])&& !empty($_POST["num"])) 
-            && (isset($_POST["titre"])&& !empty($_POST["titre"])) )
-        {
-            $_POST["num"]=htmlspecialchars($_POST["num"]);
-            $num = $_POST["num"];
-            
-            $_POST["titre"]=htmlspecialchars($_POST["titre"]);
-            $titre = $_POST["titre"];
-            
-            $_POST["desc"]=htmlspecialchars($_POST["desc"]);
-            $description = $_POST["desc"];
-            
-            $_POST["adr"]=htmlspecialchars($_POST["adr"]);
-            $adresse = $_POST["adr"];
-        
-            $query = " INSERT INTO video "
-                    ." VALUES ('', :) ";
-            
-            try {
-                $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-                foreach ($results as $result) {
-                    $videos[] = Video::initialize($result);
-                }
+        $query = " INSERT INTO video "
+                . " VALUES ('', :num, :titre, :description, :adresse, :type, :accueil, :idSaison) ";
+        $statement = $db->prepare($query);
+        $statement->bindValue(":num", $video->getNum());
+        $statement->bindValue(":titre", $video->getTitre());
+        $statement->bindValue(":description", $video->getDescription());
+        $statement->bindValue(":adresse", $video->getAdresse());
+        $statement->bindValue(":type", $video->getType());
+        $statement->bindValue(":accueil", $video->getAccueil());
+        $statement->bindValue(":idSaison", $video->getIdSaison());
 
-                return $videos;
-            } catch (\PDOException $ex) {
-                return false;
-            }
+        try {
+            $statement->execute();
+            $id = $db->lastInsertId();
+            return $id;
+        } catch (\PDOException $ex) {
+            return false;
         }
-        else{
-            //message d'erreur
+    }
+
+    public static function deleteVideo($db, $id) {
+        //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
+
+        $query = " DELETE FROM video "
+                . " WHERE id = :id ";
+        $statement = $db->prepare($query);
+        $statement->bindValue(":id", $id);
+
+        try {
+            $statement->execute();
+            return true;
+        } catch (\PDOException $ex) {
+            return false;
         }
     }
 

@@ -23,12 +23,12 @@ class SaisonDb {
         }
     }
 
-    public static function getSaison($db, $numSaison) {
+    public static function getSaison($db, $idSaison) {
         $query = " SELECT * "
                 . "FROM saison "
-                . "WHERE num_Saison=:numSaison";
+                . "WHERE id_Saison=:$idSaison";
         $statement = $db->prepare($query);
-        $statement->bindValue(":numSaison", $numSaison);
+        $statement->bindValue(":idSaison", $idSaison);
         try {
             $statement->execute();
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);

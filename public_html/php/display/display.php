@@ -24,23 +24,23 @@ class Display
                     <a href="index.php?t=personne&action=diffEquipe">&Eacute;quipe</a>
                     </li>
                     <li>
-                    <a href="index.php?t=display&action=displayContact">Contact</a>
+                    <a href="index.php?t=display&action=contact">Contact</a>
                     </li>
                 </ul>
             </nav> 
                 
             <div id="lien">
                 <a href="#">
-                    <img alt="page Facebook" src="logo_Facebook.png" />
+                    <img alt="page Facebook" src="./ui/img/logo_Facebook.png" />
                 </a>
                 <a href="#">
-                    <img alt="page Twitter" src="logo_Twitter.png" />
+                    <img alt="page Twitter" src="./ui/img/logo_Twitter.png" />
                 </a>
                 <a href="#">
-                    <img alt="page Ullule" src="logo_Ullule.png" />
+                    <img alt="page Ullule" src="./ui/img/logo_Ullule.png" />
                 </a>
                 <a href="#">
-                    <img alt="page Youtube" src="logo_Youtube.png" />
+                    <img alt="page Youtube" src="./ui/img/logo_Youtube.png" />
                 </a>
             </div>
 EOT;

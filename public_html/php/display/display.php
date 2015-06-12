@@ -7,7 +7,33 @@ class Display
 
     public static function displayHeader()
     {
-        $html = <<<EOT
+        $auth= \User\AuthManager::getInstance();
+        if($auth->isConnected()){
+            $html = <<<EOT
+            <a href="./">
+                <img alt="accueil" src="logo.png" />
+                logo
+            </a>
+            <nav id="mainMenu">
+                <ul>
+                    <li>
+                        <a href="index.php">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="#">Saison</a>
+                    </li>
+                    <li>
+                        <a href="#>Vid&eacute;os</a>
+                    </li>
+                    <li>
+                        <a href="#">&Eacute;quipe</a>
+                    </li>
+                    
+                </ul>
+            </nav>
+EOT;
+        }else{
+            $html = <<<EOT
             <a href="./">
                 <img alt="accueil" src="logo.png" />
                 logo
@@ -27,8 +53,11 @@ class Display
                     <a href="index.php?t=display&action=contact">Contact</a>
                     </li>
                 </ul>
-            </nav> 
-                
+            </nav>
+EOT;
+        }
+        $html .= <<<EOT
+                         
             <div id="lien">
                 <a href="#">
                     <img alt="page Facebook" src="./ui/img/logo_Facebook.png" />
@@ -57,23 +86,33 @@ EOT;
 
                         <label for="nom">Nom :</label>
                         <input type="text" name="nom" id="nom" />
-
+                        
+                        <br/>
+                
                         <label for="prenom">Prénom :</label>
                         <input type="text" name="prenom" id="prenom" />
-
+                        
+                        <br/>
+                
                         <label for="email">E-mail :</label>
                         <input type="email" name="email" id="email" />
-                    
-                        <label for="objet">Objet :</label><br />
+                                            
+                        <br/>
+                
+                        <label for="objet">Objet :</label>
                         <select name="objet" id="objet">
                             <option value="question">Question</option>
                             <option value="participer">Participer</option>
                             <option value="autre">Autre</option>
                         </select>
-
+                        
+                        <br/>
+                
                         <label for="demande">Demande :</label>
                         <textarea name="demande" id="demande" cols="40" rows="4"></textarea>
-                        
+                                                
+                        <br/>
+                
                         <input type="submit" value="Envoyer" />
                     </fieldset>
                 </form>

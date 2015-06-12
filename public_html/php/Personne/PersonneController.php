@@ -35,7 +35,7 @@ class PersonneController
     public function allGuest()
     {
         $personnes = PersonneDb::getGuest($this->db);
-        $content = PersonneHtml::displayPersonne($personnes);
+        $content = PersonneHtml::displayPersonnes($personnes);
         $this->response->setPart("content", $content);
         return $this->response;
     }
@@ -45,6 +45,19 @@ class PersonneController
         $content = PersonneHtml::displayChoixTypePersonne();
         $this->response->setPart("content", $content);
         return $this->response; 
+    }
+    
+    public function login()
+    {
+        $auth = \User\AuthManager::getInstance();
+        try {
+            $auth->checkAuthentication($this->db, $this->request->getPostParam("username"), $this->request->getPostParam("password"));
+            $content = "Vous êtes maintenant connecté, bienvenue " . $auth->getUsername();
+        } catch (AuthException $ex) {
+            $content = $ex->getMessage();
+        }
+        $this->response->setPart("content", $content);
+        return $this->response;
     }
 
 }

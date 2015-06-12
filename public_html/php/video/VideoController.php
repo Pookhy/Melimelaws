@@ -21,6 +21,10 @@ class VideoController {
         return $this->response;
     }
 
+    
+    
+    //          ADMIN
+    
     public function formInsertVideo() {
         $saisons = \Saison\SaisonDb::getAllSaisons($this->db);
         $content = VideoHtml::displayInsertVideo($saisons);
@@ -30,60 +34,74 @@ class VideoController {
 
     public function insertVideo() {
         $values = $this->request->getAllPostParams();
-        var_dump($values);
-        if ((isset($values["num"]) && !empty($values["num"])) && (isset($values["titre"]) && !empty($values["titre"])) && (isset($values["description"]) && !empty($values["description"])) && (isset($values["adresse"]) && !empty($values["adresse"])) && (isset($values["type"]) && !empty($values["type"])) && (isset($values["accueil"]) && !empty($values["accueil"])) && (isset($values["idSaison"]) && !empty($values["idSaison"]))
-        ) {
-            
-        }
-        $video = Video::initialize($values);
-        var_dump($video);
-        $id = VideoDb::insertVideo($this->db, $video);
         $content = "";
-        $this->response->setPart("content", $content);
-        return $this->response;
-    }
-    
-    public function formDeleteVideo() {
-        $video = getVideo($this->db);
-        $saison = \Saison\SaisonDb::getSaison($this->db, $video->getIdSaison());
-        $video->setNumSaison($saison->getNum());
+        if ((isset($values["num_Video"]) && !empty($values["num_Video"])) && (isset($values["titre_Video"]) && !empty($values["titre_Video"])) && (isset($values["description_Video"]) && !empty($values["description_Video"])) && (isset($values["adresse_Video"]) && !empty($values["adresse_Video"])) && (isset($values["type_Video"]) && !empty($values["type_Video"])) && (isset($values["accueil_Video"]) && !empty($values["accueil_Video"])) && (isset($values["id_Saison"]) && !empty($values["id_Saison"]))
+        ) {
+            $video = Video::initialize($values);
+            $id = VideoDb::insertVideo($this->db, $video);
+            $content = VideoHtml::displayVideo($video);
+        } else {
+            echo "manque un truc";
+        }
 
-        $content = VideoHtml::displayFormDeleteVideo($video);
         $this->response->setPart("content", $content);
         return $this->response;
     }
 
     public function deleteVideo() {
-        $values = $this->request->getGetParam("id");
-        var_dump($values);
-        
-        VideoDb::deleteVideo($this->db,$id);
+        $id = $this->request->getGetParam("id");
+        VideoDb::deleteVideo($this->db, $id);
+
+        $url = $_SERVER['HTTP_REFERER'];
+        header('Location: ' . $url);
     }
 
     public function formUpdateVideo() {
-        $video = getVideo($this->db);
+        $id = $this->request->getGetParam("id");
+        $video = VideoDb::getVideo($this->db, $id);
+
         $saison = \Saison\SaisonDb::getSaison($this->db, $video->getIdSaison());
         $video->setNumSaison($saison->getNum());
 
-        $content = VideoHtml::displayFormUpdateVideo($video);
+        $saisons = \Saison\SaisonDb::getAllSaisons($this->db);
+        
+//        $messages = MessageDb::getXMessages($this->db, $nb);
+//        $content = MessageHtml::displayMessages($messages); 
+//        $this->response->setPart("content", $content);
+//        return $this->response;
+        
+        $content = VideoHtml::displayFormUpdateVideo($video, $saisons);
         $this->response->setPart("content", $content);
         return $this->response;
     }
 
     public function updateVideo() {
-        $video = getVideo($this->db, $id);
+        $values = $this->request->getAllPostParams();
+        $video = Video::initialize($values);
         $saison = \Saison\SaisonDb::getSaison($this->db, $video->getIdSaison());
         $video->setNumSaison($saison->getNum());
-    }
+        $ajout = VideoDb::updateVideo($this->db, $video);
 
-    public function seeAllVideos() {
-        $videos = getAllVideos($this->db); // ERREUR ICI POURQUOI ?
-       
+        $videos = VideoDb::getAllVideos($this->db);
         foreach ($videos as $video) {
             $saison = \Saison\SaisonDb::getSaison($this->db, $video->getIdSaison());
             $video->setNumSaison($saison->getNum());
         }
-        $content = VideoHtml::displayAmdinVideos;
+        $content = VideoHtml::displayAdminVideos($videos);
+        $this->response->setPart("content", $content);
+        return $this->response;
+    }
+
+    public function seeAllVideos() {
+        $videos = VideoDb::getAllVideos($this->db);
+
+        foreach ($videos as $video) {
+            $saison = \Saison\SaisonDb::getSaison($this->db, $video->getIdSaison());
+            $video->setNumSaison($saison->getNum());
+        }
+        $content = VideoHtml::displayAdminVideos($videos);
+        $this->response->setPart("content", $content);
+        return $this->response;
     }
 
 }

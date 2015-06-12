@@ -36,7 +36,7 @@ class VideoDb {
             $statement->execute();
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-            $video = Video::initialize($result);
+            $video = Video::initialize($result[0]);
 
             return $video;
         } catch (\PDOException $ex) {
@@ -155,6 +155,8 @@ class VideoDb {
             return false;
         }
     }
+    
+    // ADMIN
 
     public static function insertVideo($db, $video) {
         //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
@@ -178,12 +180,43 @@ class VideoDb {
             return false;
         }
     }
+    
+    public static function updateVideo($db, $video) {
+        $query = " UPDATE video "
+                . " SET id_Video = :id, "
+                . "     num_Video = :num, "
+                . "     titre_Video = :titre, "
+                . "     description_Video = :description, "
+                . "     adresse_Video = :adresse, "
+                . "     type_Video = :type, "
+                . "     accueil_Video = :accueil, "
+                . "     id_Saison = :idSaison "
+                . " WHERE id_Video = :id ";
+        $statement = $db->prepare($query);
+        $statement->bindValue(":id", $video->getId());
+        $statement->bindValue(":num", $video->getNum());
+        $statement->bindValue(":titre", $video->getTitre());
+        $statement->bindValue(":description", $video->getDescription());
+        $statement->bindValue(":adresse", $video->getAdresse());
+        $statement->bindValue(":type", $video->getType());
+        $statement->bindValue(":accueil", $video->getAccueil());
+        $statement->bindValue(":idSaison", $video->getIdSaison());
+
+        try {
+            $statement->execute();
+            $id = $db->lastInsertId();
+            return $id;
+        } catch (\PDOException $ex) {
+            echo $ex;
+            return false;
+        }
+    }
 
     public static function deleteVideo($db, $id) {
         //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
 
         $query = " DELETE FROM video "
-                . " WHERE id = :id ";
+                . " WHERE id_Video = :id ";
         $statement = $db->prepare($query);
         $statement->bindValue(":id", $id);
 
@@ -191,6 +224,7 @@ class VideoDb {
             $statement->execute();
             return true;
         } catch (\PDOException $ex) {
+            echo 'marche pas'.$ex->getMessage();
             return false;
         }
     }

@@ -24,9 +24,19 @@ class VideoHtml {
 EOT;
         return $html;
     }
+
+    public static function displayVideos($videos) {
+        $html = "";
+        foreach ($videos as $video) {
+            $html .= self::displayVideo($video);
+        }
+
+        return $html;
+    }
     
-    public static function displayAmdinVideos($videos) {
-        //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
+    //ADMIN
+    
+    public static function displayAdminVideos($videos) {
         $html = "";
         $html .= <<<EOT
         <table>
@@ -51,7 +61,15 @@ EOT;
                 <td>{$video->getDescription()}</td>
                 <td>{$video->getAdresse()}</td>
                 <td>{$video->getType()}</td>
-                <td>{$video->getAccueil()}</td>
+                <td>
+EOT;
+                    if($video->getAccueil() != 1){
+                        $html .="Non";
+                    }else{
+                        $html .="Oui";
+                    }
+                    $html .= <<<EOT
+                </td>
                 <td>{$video->getNumSaison()}</td>
                 <td>
                     <a href="index.php?t=Video&action=formUpdateVideo&id={$video->getId()}" alt="Modifier">
@@ -59,7 +77,7 @@ EOT;
                     </a>
                 </td>
                 <td>
-                    <a href="index.php?t=Video&action=formDeleteVideo&id={$video->getId()}" alt="Supprimer">
+                    <a href="index.php?t=Video&action=deleteVideo&id={$video->getId()}" alt="Supprimer" onclick="return(confirm('Supprimer cette vidéo'))">
                         Supprimer
                     </a>
                 </td>
@@ -67,16 +85,6 @@ EOT;
 EOT;
         }
         $html .= "</table>";
-        return $html;
-    }
-
-    public static function displayVideos($videos) {
-        $html = "";
-        foreach ($videos as $video) {
-            var_dump($videos);
-            $html .= self::displayVideo($video);
-        }
-
         return $html;
     }
 
@@ -90,31 +98,31 @@ EOT;
                     <fieldset>
                         <legend> Vidéo </legend>
                             <label for"num">Numéro :</label> 
-                            <input id="num" type="text" name="num">
+                            <input id="num" type="text" name="num_Video">
                             <br/>
                             <label for"titre">Titre :</label>
-                            <input id="titre" type="text" name="titre">
+                            <input id="titre" type="text" name="titre_Video">
                             <br/>
                             <label for"description">Description :</label> 
-                            <input id="description" type="text" name="description">
+                            <input id="description" type="text" name="description_Video">
                             <br/>
                             <label for"adresse">Adresse YouTube :</label> 
-                            <input id="adresse" type="text" name="adresse">
+                            <input id="adresse" type="text" name="adresse_Video">
                             <br/>
                             <label for"type">Type :</label> 
-                            <select id="type" type="text" name="type">
+                            <select id="type" type="text" name="type_Video">
                                 <option value="episode">episode</otpion>
                                 <option value="bonus">bonus</otpion>
                             </select>
                             <br/>
                             <label for"accueil">Visible sur l'accueil :</label> 
-                            <select id="accueil" type="text" name="accueil">
+                            <select id="accueil" type="text" name="accueil_Video">
                                 <option value="1" default>Non</otpion>
                                 <option value="0">Oui</otpion> 
                             </select>
                             <br/>
                             <label for"idSaison">Saison :</label> 
-                            <select id="idSaison" type="text" name="idSaison">
+                            <select id="idSaison" type="text" name="id_Saison">
 EOT;
         foreach ($saisons as $saison){
             $html .= "<option value = \"{$saison->getId()}\">Saison {$saison->getNum()}</otpion >";
@@ -132,52 +140,70 @@ EOT;
         return $html;
     }
     
-    public static function displayFormUpdateVideo($video) {
+    public static function displayFormUpdateVideo($video, $saisons) {
         //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
  
-        $saison = \Saison\SaisonDb::getSaison($this->db, $video->getIdSaison());
-        $video->setNumSaison($saison->getNum());
-
         $html = '';
         $html .= <<<EOT
             <div class="Modification">
                 <form action ="./index.php?t=video&action=updateVideo" method="post">
                     <fieldset>
                         <legend> Vidéo à modifier </legend> 
-                            <input id="id" type="hidden" name="id">
+                            <input id="id" type="hidden" name="id_Video" value="{$video->getId()}">
                 
                             <label for"num">Numéro :</label> 
-                            <input id="num" type="text" name="num" value={$video->getNum()}>
+                            <input id="num" type="text" name="num_Video" value="{$video->getNum()}">
                             <br/>
                             <label for"titre">Titre :</label>
-                            <input id="titre" type="text" name="titre" value={$video->getTitre()}>
+                            <input id="titre" type="text" name="titre_Video" value="{$video->getTitre()}">
                             <br/>
                             <label for"description">Description :</label> 
-                            <input id="description" type="text" name="description" value={$video->getDescription()}>
+                            <input id="description" type="text" name="description_Video" value="{$video->getDescription()}">
                             <br/>
                             <label for"adresse">Adresse YouTube :</label> 
-                            <input id="adresse" type="text" name="adresse" value={$video->getAdresse()}>
+                            <input id="adresse" type="text" name="adresse_Video" value="{$video->getAdresse()}">
                             <br/>
                             <label for"type">Type :</label> 
-                            <select id="type" type="text" name="type">
+                            <select id="type" type="text" name="type_Video">
                                 <option value="episode">episode</otpion>
                                 <option value="bonus">bonus</otpion>
                             </select>
                             <br/>
                             <label for"accueil">Visible sur l'accueil :</label> 
-                            <select id="accueil" type="text" name="accueil">
-                                <option value="1" default>Non</otpion>
-                                <option value="0">Oui</otpion> 
+                            <select id="accueil" type="text" name="accueil_Video">
+                                <option value =\"{$video->getAccueil()}\" selected >
+EOT;
+                                if($video->getAccueil() != 1){
+                                    $html .="Non";
+                                }else{
+                                    $html .="Oui";
+                                }
+                                
+                                $html .= <<<EOT
+                                </option>
+EOT;
+                                if($video->getAccueil() == 1){
+                                    $html .="<option value='0'>Non</option>";
+                                }else{
+                                    $html .="<option value='1'>Oui</option>";
+                                }
+                                
+                            $html .= <<<EOT
                             </select>
                             <br/>
                             <label for"idSaison">Saison :</label> 
-                            <select id="idSaison" type="text" name="idSaison" value={$video->getNumSaison()}>
+                            <select id="idSaison" type="text" name="id_Saison" value="{$video->getNumSaison()}">
 EOT;
-        foreach ($saisons as $saison){
-            $html .= "<option value = \"{$saison->getId()}\">Saison {$saison->getNum()}</otpion >";
+                            foreach ($saisons as $saison){
+                                $html .= "<option value = \"{$saison->getId()}\"";
+                                if($saison->getNum() == $video->getNumSaison())
+                                {
+                                    $html .= 'selected';
+                                }
+                                $html .= ">Saison {$saison->getNum()}</otpion >";
 
-        }
-        $html .= <<<EOT
+                            }
+                            $html .= <<<EOT
                             </select>
                             <br/>
                             <br/>

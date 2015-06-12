@@ -8,6 +8,8 @@ $loader->addNameSpace("Video", "php/video");
 $loader->addNameSpace("Personne", "php/personne");
 $loader->addNameSpace("Saison", "php/saison");
 $loader->addNameSpace("Display", "php/display");
+$loader->addNameSpace("Message", "php/message");
+$loader->addNameSpace("User", "php/auth");
 $loader->register();
 
 session_start();

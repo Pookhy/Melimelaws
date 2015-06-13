@@ -42,12 +42,12 @@ EOT;
                 <td>{$message->getContenu()}</td>
                 <td>{$message->getIdPersonne()}</td>
                 <td>
-                    <a href="index.php?t=Message&action=formUpdateMessage&id={$message->getId()}" alt="Modifier">
+                    <a href="index.php?t=message&action=formUpdateMessage&id={$message->getId()}" alt="Modifier">
                         Modifier
                     </a>
                 </td>
                 <td>
-                    <a href="index.php?t=Message&action=deleteMessage&id={$message->getId()}" alt="Supprimer" onclick="return(confirm('Supprimer ce message ?'))">
+                    <a href="index.php?t=message&action=deleteMessage&id={$message->getId()}" alt="Supprimer" onclick="return(confirm('Supprimer ce message ?'))">
                         Supprimer
                     </a>
                 </td>
@@ -85,7 +85,7 @@ EOT;
     }
     
     public static function displayFormUpdateMessage($message) {
-        
+        var_dump($message);
         $html = '';
         $html .= <<<EOT
             <div class="Modification">

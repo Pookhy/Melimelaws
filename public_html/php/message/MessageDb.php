@@ -14,13 +14,9 @@ class MessageDb {
         
         try {
             $statement->execute();
-            $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
-            foreach ($results as $result) {
-                $messages[] = Message::initialize($result);
-            }
-
-            return $messages;
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $message = Message::initialize($result[0]);
+            return $message;
         } catch (\PDOException $ex) {
             return false;
         }
@@ -29,7 +25,7 @@ class MessageDb {
     public static function getAllMessages($db) {
         $query = " SELECT * "
                 . " FROM message "
-                . " ORDER BY date_Message ";
+                . " ORDER BY date_Message DESC ";
 
         $statement = $db->prepare($query);
         try {
@@ -70,7 +66,6 @@ class MessageDb {
     // ADMIN
 
     public static function insertMessage($db, $message) {
-        //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
 
         $query = " INSERT INTO message "
                 . " VALUES ('', :date, :contenu, :idPersonne) ";
@@ -93,8 +88,8 @@ class MessageDb {
                 . " SET id_Message = :id, "
                 . "     date_Message = :date, "
                 . "     contenu_Message = :contenu, "
-                . "     id_Message = :idPersonne "
-                . " WHERE id_Video = :id ";
+                . "     id_Personne = :idPersonne "
+                . " WHERE id_Message = :id ";
         $statement = $db->prepare($query);
         $statement->bindValue(":id", $message->getId());
         $statement->bindValue(":date", $message->getDate());

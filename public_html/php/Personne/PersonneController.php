@@ -72,7 +72,7 @@ class PersonneController
 
     public function insertPersonne() {
         $values = $this->request->getAllPostParams();
-        $content = "";
+        
         if ((isset($values["nom_Personne"]) && !empty($values["nom_Personne"])) 
                 && (isset($values["prenom_Personne"]) && !empty($values["prenom_Personne"])) 
                 && (isset($values["bio_Personne"]) && !empty($values["bio_Personne"])) 
@@ -81,11 +81,11 @@ class PersonneController
         ) {
             $personne = Personne::initialize($values);
             $id = PersonneDb::insertPersonne($this->db, $personne);
-            $content = PersonneHtml::displayPersonne($personne);
         } else {
             echo "manque un truc";
         }
-
+        $personnes = PersonneDb::getAllPersonnes($this->db);
+        $content = PersonneHtml::displayAdminPersonnes($personnes);
         $this->response->setPart("content", $content);
         return $this->response;
     }

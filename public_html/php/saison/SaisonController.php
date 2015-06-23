@@ -15,8 +15,13 @@ class SaisonController
     }
 
     public function allSaisons(){
-        $saison = SaisonDb::getAllSaisons($this->db);
-        $content = SaisonHtml::displaySaisons($saison);
+        $allSaisons = SaisonDb::getAllSaisons($this->db);
+        foreach ($allSaisons as $saison) {
+            if(\Video\VideoDb::getEpisodesSaison($this->db, $saison->getId()) != false){
+                $saisons[] = $saison;
+            }
+        }
+        $content = SaisonHtml::displaySaisons($saisons);
         
         $this->response->setPart("content", $content);
         return $this->response;
@@ -39,17 +44,18 @@ class SaisonController
 
     public function insertSaison() {
         $values = $this->request->getAllPostParams();
-        $content = "";
+        
         if ((isset($values["num_Saison"]) && !empty($values["num_Saison"])) 
                 && (isset($values["photo_Saison"]) && !empty($values["photo_Saison"])) 
         ) {
             $saison = Saison::initialize($values);
             $id = SaisonDb::insertSaison($this->db, $saison);
-            $content = SaisonHtml::displaySaison($saison);
         } else {
             echo "manque un truc";
         }
-
+        
+        $saisons = SaisonDb::getAllSaisons($this->db);
+        $content = SaisonHtml::displayAdminSaisons($saisons);
         $this->response->setPart("content", $content);
         return $this->response;
     }

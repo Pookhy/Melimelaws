@@ -21,18 +21,18 @@ EOT;
 
     public static function displaySaisons($saisons)
     {
-        $html = "";
+        $html = '<div id="contenu">';
         foreach ($saisons as $saison) {
             $html .= self::displaySaison($saison);
         }
-
+        $html .='</div>';
         return $html;
     }
 
     //          ADMIN
     
     public static function displayAdminSaisons($saisons) {
-        $html = "";
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
         <table>
             <caption>Table Saison</caption>
@@ -43,6 +43,7 @@ EOT;
             </tr>     
 EOT;
         foreach ($saisons as $saison) {
+            
             $html .= <<<EOT
             <tr>
                 <td>{$saison->getId()}</td>
@@ -62,12 +63,15 @@ EOT;
 EOT;
         }
         $html .= "</table>";
+        $html .= "<br/>";
+        $html .= "<a href='index.php?t=Saison&action=formInsertSaison' alt='Ajouter Saison'>Ajouter</a>";
+        $html .= "</div>";
         return $html;
     }
 
     public static function displayInsertSaison() {
 
-        $html = '';
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
             <div class="insert">
                 <form action ="./index.php?t=saison&action=insertSaison" method="post">
@@ -85,12 +89,13 @@ EOT;
                 </form>
             </div>
 EOT;
+        $html .= "</div>";
         return $html;
     }
     
     public static function displayFormUpdateSaison($saison) {
 
-        $html = '';
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
             <div class="Modification">
                 <form action ="./index.php?t=saison&action=updateSaison" method="post">
@@ -110,6 +115,7 @@ EOT;
                 </form>
             </div>
 EOT;
+        $html .= "</div>";
         return $html;
     }
 }

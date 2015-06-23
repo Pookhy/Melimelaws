@@ -6,24 +6,25 @@ class MessageHtml{
     public static function displayMessage($message){
         $html = '';
         $html .= <<<EOT
-               {$message->getContenu()}<br/>
+            <div class= "message">
+               {$message->getContenu()}
+            </div>
 EOT;
         return $html;
     }
     
-    public static function displayMessages($messages){
-        $html = "";
+    public static function displayMessages($messages)   { 
+        $html = '';
         foreach($messages as $message){
             $html .= self::displayMessage($message);
         }
-        
         return $html;
     }
     
     //ADMIN
     
     public static function displayAdminMessages($messages) {
-        $html = "";
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
         <table>
             <caption>Table Message</caption>
@@ -54,23 +55,27 @@ EOT;
             </tr>    
 EOT;
         }
+        
         $html .= "</table>";
+        $html .= "<br/>";
+        $html .= "<a href='index.php?t=Message&action=formInsertMessage' alt='Ajouter Message'>Ajouter</a>";
+        $html .= "</div>";
         return $html;
     }
 
     public static function displayInsertMessage() {
 
-        $html = '';
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
             <div class="insert">
                 <form action ="./index.php?t=message&action=insertMessage" method="post">
                     <fieldset>
                         <legend> Message </legend>
                             <label for"date">Date :</label> 
-                            <input id="date" type="text" name="date_Message">
+                            <input id="date" type="date" name="date_Message">
                             <br/>
-                            <label for"contenu">Message :</label>
-                            <input id="contenu" type="text" name="contenu_Message">
+                            <label for"message">Message :</label>
+                            <input id="message" type="text" name="contenu_Message">
                             <br/>
                             <label for"idPersonne">Autheur :</label> 
                             <input id="idPersonne" type="text" name="id_Personne">
@@ -81,12 +86,12 @@ EOT;
                 </form>
             </div>
 EOT;
+        $html .= "</div>";
         return $html;
     }
     
     public static function displayFormUpdateMessage($message) {
-        var_dump($message);
-        $html = '';
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
             <div class="Modification">
                 <form action ="./index.php?t=message&action=updateMessage" method="post">
@@ -95,10 +100,10 @@ EOT;
                             <input id="id" type="hidden" name="id_Message" value="{$message->getId()}">
                 
                             <label for"date">Numéro :</label> 
-                            <input id="date" type="text" name="date_Message" value="{$message->getDate()}">
+                            <input id="date" type="date" name="date_Message" value="{$message->getDate()}">
                             <br/>
-                            <label for"contenu">Message :</label>
-                            <input id="contenu" type="text" name="contenu_Message" value="{$message->getContenu()}">
+                            <label for"message">Message :</label>
+                            <input id="message" type="text" name="contenu_Message" value="{$message->getContenu()}">
                             <br/>
                             <label for"idPersonne">Autheur :</label> 
                             <input id="idPersonne" type="text" name="id_Personne" value="{$message->getIdPersonne()}">
@@ -109,6 +114,7 @@ EOT;
                 </form>
             </div>
 EOT;
+        $html .= "</div>";
         return $html;
     }
 

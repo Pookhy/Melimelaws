@@ -16,7 +16,7 @@ class VideoHtml {
             <div class="video">
                 <span class="videoTitle">{$type} {$video->getNum()}</span>
                 <br/>
-                <iframe width="560" height="315" src="$url" frameborder="0" allowfullscreen></iframe>
+                <iframe src="$url" frameborder="0" allowfullscreen></iframe>
                 <!--[if lte IE 6 ]>
                     <embed src="$url" type="application/x-shockwave-flash" wmode="transparent" width="425" height="355"></embed>
                 <![endif]-->
@@ -26,10 +26,11 @@ EOT;
     }
 
     public static function displayVideos($videos) {
-        $html = "";
+        $html = '<div id="contenu">';
         foreach ($videos as $video) {
             $html .= self::displayVideo($video);
         }
+         $html .='</div>';
 
         return $html;
     }
@@ -37,7 +38,7 @@ EOT;
     //ADMIN
     
     public static function displayAdminVideos($videos) {
-        $html = "";
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
         <table>
             <caption>Table Vidéo</caption>
@@ -85,44 +86,47 @@ EOT;
 EOT;
         }
         $html .= "</table>";
+        $html .= "<br/>";
+        $html .= "<a href='index.php?t=Video&action=formInsertVideo' alt='Ajouter Video'>Ajouter</a>";
+        $html .= "</div>";
         return $html;
     }
 
     public static function displayInsertVideo($saisons) {
         //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
 
-        $html = '';
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
             <div class="insert">
                 <form action ="./index.php?t=video&action=insertVideo" method="post">
                     <fieldset>
                         <legend> Vidéo </legend>
                             <label for"num">Numéro :</label> 
-                            <input id="num" type="text" name="num_Video">
+                            <input id="num" type="text" name="num_Video" required>
                             <br/>
                             <label for"titre">Titre :</label>
-                            <input id="titre" type="text" name="titre_Video">
+                            <input id="titre" type="text" name="titre_Video" required>
                             <br/>
                             <label for"description">Description :</label> 
-                            <input id="description" type="text" name="description_Video">
+                            <input id="description" type="text" name="description_Video" required>
                             <br/>
                             <label for"adresse">Adresse YouTube :</label> 
-                            <input id="adresse" type="text" name="adresse_Video">
+                            <input id="adresse" type="text" name="adresse_Video" required>
                             <br/>
                             <label for"type">Type :</label> 
                             <select id="type" type="text" name="type_Video">
-                                <option value="episode">episode</otpion>
+                                <option value="episode" default>episode</otpion>
                                 <option value="bonus">bonus</otpion>
                             </select>
                             <br/>
                             <label for"accueil">Visible sur l'accueil :</label> 
                             <select id="accueil" type="text" name="accueil_Video">
-                                <option value="1" default>Non</otpion>
-                                <option value="0">Oui</otpion> 
+                                <option value="0" default>Non</otpion>
+                                <option value="1">Oui</otpion> 
                             </select>
                             <br/>
                             <label for"idSaison">Saison :</label> 
-                            <select id="idSaison" type="text" name="id_Saison">
+                            <select id="idSaison" type="text" name="id_Saison"  required>
 EOT;
         foreach ($saisons as $saison){
             $html .= "<option value = \"{$saison->getId()}\">Saison {$saison->getNum()}</otpion >";
@@ -137,13 +141,14 @@ EOT;
                 </form>
             </div>
 EOT;
+        $html .= "</div>";
         return $html;
     }
     
     public static function displayFormUpdateVideo($video, $saisons) {
         //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
  
-        $html = '';
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
             <div class="Modification">
                 <form action ="./index.php?t=video&action=updateVideo" method="post">
@@ -212,6 +217,7 @@ EOT;
                 </form>
             </div>
 EOT;
+        $html .= "</div>";
         return $html;
     }
 }

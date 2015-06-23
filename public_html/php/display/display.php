@@ -10,9 +10,9 @@ class Display
         $auth= \User\AuthManager::getInstance();
         if($auth->isConnected()){
             $html = <<<EOT
+            
             <a href="./">
-                <img alt="accueil" src="logo.png" />
-                logo
+                <img id="logo" alt="accueil" src="./ui/img/logo.jpg" />
             </a>
             <nav id="mainMenu">
                 <ul>
@@ -34,9 +34,9 @@ class Display
 EOT;
         }else{
             $html = <<<EOT
+
             <a href="./">
-                <img alt="accueil" src="logo.png" />
-                logo
+                <img id="logo" alt="accueil" src="./ui/img/logo.jpg" />
             </a>
             <nav id="mainMenu">
                 <ul>
@@ -78,7 +78,8 @@ EOT;
     
     public static function displayContact()
     {
-        $html = <<<EOT
+       $html = '<div id="contenu">';
+        $html .= <<<EOT
                 <form method="post" action="">
  
                     <fieldset>
@@ -117,6 +118,7 @@ EOT;
                     </fieldset>
                 </form>
 EOT;
+        $html .='</div>';
         return $html;
     }
     
@@ -128,7 +130,9 @@ EOT;
     public static function displayFooter()
     {
         $html = <<<EOT
+            <div id="footer">
                 <a href="#">Mentions L&eacute;gales</a> <a href="#">Contact</a>
+            </div>
 EOT;
         return $html;
     }

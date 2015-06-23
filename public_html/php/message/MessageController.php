@@ -33,18 +33,19 @@ class MessageController
 
     public function insertMessage() {
         $values = $this->request->getAllPostParams();
-        $content = "";
+
         if ((isset($values["date_Message"]) && !empty($values["date_Message"])) 
                 && (isset($values["contenu_Message"]) && !empty($values["contenu_Message"])) 
                 && (isset($values["id_Personne"]) && !empty($values["id_Personne"])) 
         ) {
             $message = Message::initialize($values);
             $id = MessageDb::insertMessage($this->db, $message);
-            $content = MessageHtml::displayMessage($message);
         } else {
             echo "manque un truc";
         }
-
+        
+        $messages = MessageDb::getAllMessages($this->db);
+        $content = MessageHtml::displayAdminMessages($messages);
         $this->response->setPart("content", $content);
         return $this->response;
     }

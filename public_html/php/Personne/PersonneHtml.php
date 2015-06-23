@@ -20,43 +20,42 @@ EOT;
     }
 
     public static function displayPersonnes($personnes) {
-        $html = "";
+        $html = '<div id="contenu">';
         foreach ($personnes as $personne) {
             $html .= self::displayPersonne($personne);
         }
-
+        $html .='</div>';
         return $html;
     }
     
     public static function displayEquipes($personnes) {
-        $html = "";
+        $html = '<div id="contenu">';
         foreach ($personnes as $personne) {
             $html .= self::displayPersonne($personne);
         }
-
+        $html .='</div>';
         return $html;
     }
 
     public static function displayChoixTypePersonne() {
-        $html = "";
+        $html = '<div id="contenu">';
         $html .= <<<EOT
             <div class="personne">
                
                 <a href="index.php?t=Personne&action=allEquipe" >
-                    <span>Les Melimelaws</span>
                     <img alt="" src="http://www.vaceva.com/v2/img/rubriques/equipe.jpg"/>
+                    Qui sommes nous ?
                 </a>
                 
-               <br/>
                 
                 <a href="index.php?t=Personne&action=allGuest" >
-                    <span>Les Guest</span>
                     <img alt="" src="http://www.searchmarketingstandard.com/wp-content/uploads/2013/04/WelcomeGuestsshutterstock_10730578.jpg"/>
+                    Qui sont-ils ?
                 </a>
-               
+
             </div>
 EOT;
-
+        $html .='</div>';
         return $html;
     }
 
@@ -64,7 +63,7 @@ EOT;
     //ADMIN
     
     public static function displayAdminPersonnes($personnes) {
-        $html = "";
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
         <table>
             <caption>Table Personne</caption>
@@ -104,12 +103,15 @@ EOT;
 EOT;
         }
         $html .= "</table>";
+        $html .= "<br/>";
+        $html .= "<a href='index.php?t=Personne&action=formInsertPersonne' alt='Ajouter Personne'>Ajouter</a>";
+        $html .= "</div>";
         return $html;
     }
 
     public static function displayInsertPersonne() {
 
-        $html = '';
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
             <div class="insert">
                 <form action ="./index.php?t=personne&action=insertPersonne" method="post">
@@ -145,12 +147,13 @@ EOT;
                 </form>
             </div>
 EOT;
+        $html .= "</div>";
         return $html;
     }
     
     public static function displayFormUpdatePersonne($personne) {
  
-        $html = '';
+        $html = "<div id='contenu'>";
         $html .= <<<EOT
             <div class="Modification">
                 <form action ="./index.php?t=personne&action=updatePersonne" method="post">
@@ -172,7 +175,7 @@ EOT;
                             <br/>
                             <label for"type">Type :</label> 
                             <select id="type" type="text" name="type_Personne">
-                                <option value =\"{$personne->getType()}\" selected >
+                                <option value ="{$personne->getType()}" selected >
                                     {$personne->getType()}
                                 </option>
 EOT;
@@ -197,6 +200,7 @@ EOT;
                 </form>
             </div>
 EOT;
+        $html .= "</div>";
         return $html;
     }
 }

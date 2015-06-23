@@ -1,11 +1,57 @@
+body{
+	background-color: #848484;
+}
+
+iframe{
+    width:560px;
+    height:315px;
+} 
+
 .saison img{
     width:150px;
     height:150px;
 }
+
+.personne img{
+    width:300px;
+    height:150px;
+}
+
+#mainMenu{
+	background-color: #BDBDBD;
+}
+
 #mainMenu ul li{
     display:inline-block;
 }
 
 #lien img{
     display:none
+}
+
+#logo{
+    width: 5%;
+}
+
+#contenu{
+	background-color: #FF0040;
+	float: left;
+	width: 80%;
+}
+
+#messages{
+    float: right;
+    width: 20%;
+    background-color: #BDBDBD;
+}
+
+.message{
+    border: solid 1px black;
+}
+
+#footer{
+    clear: both;
+    background-color: #000000;
+    text-align: center;
+    color: white;
 }

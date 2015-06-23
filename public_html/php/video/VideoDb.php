@@ -10,9 +10,33 @@ class VideoDb {
                 . " WHERE accueil_Video = True ";
 
         $statement = $db->prepare($query);
+        
         try {
             $statement->execute();
             $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            
+            if(sizeof($results) == 0)
+            {
+                $query = " SELECT * "
+                        . " FROM video "
+                        . " ORDER BY id_Saison DESC, num_Video DESC "
+                        . " LIMIT 1 ";
+
+                $statement = $db->prepare($query);
+
+                try {
+                    $statement->execute();
+                    $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
+                    foreach ($results as $result) {
+                        $videos[] = Video::initialize($result);
+                    }
+
+                    return $videos;
+                    
+                } catch (\PDOException $ex) {
+                    return false;
+                }
+            }
 
             foreach ($results as $result) {
                 $videos[] = Video::initialize($result);
@@ -101,11 +125,13 @@ class VideoDb {
         try {
             $statement->execute();
             $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
+            var_dump($results);
             foreach ($results as $result) {
-                $videos[] = Video::initialize($result);
+                //$videos[] = Video::initialize($result);
+                //$videos[] = isset($result) ? Video::initialize($result) : Video::initialize();
+                $videos[] = isset($result['id_video']) ? Video::initialize($result) : Video::initialize(array());
             }
-
+            //var_dump($videos);
             return $videos;
         } catch (\PDOException $ex) {
             return false;

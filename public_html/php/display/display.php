@@ -11,9 +11,12 @@ class Display
         if($auth->isConnected()){
             $html = <<<EOT
             
-            <a href="./">
-                <img id="logo" alt="accueil" src="./ui/img/logo.jpg" />
-            </a>
+            <div id="tete">
+                <a href="./">
+                    <img id="logo" alt="accueil" src="./ui/img/logo.jpg" />
+                </a>
+            </div>
+            
             <nav id="mainMenu">
                 <ul>
                     <li>
@@ -35,9 +38,11 @@ EOT;
         }else{
             $html = <<<EOT
 
-            <a href="./">
-                <img id="logo" alt="accueil" src="./ui/img/logo.jpg" />
-            </a>
+            <div id="tete">
+                <a href="./">
+                    <img id="logo" alt="accueil" src="./ui/img/logo.jpg" />
+                </a>
+            </div>
             <nav id="mainMenu">
                 <ul>
                     <li>
@@ -58,9 +63,9 @@ EOT;
         }
         $html .= <<<EOT
                          
-            <div id="lien">
+            <div id="lien" class="RS">
                 <a href="#">
-                    <img alt="page Facebook" src="./ui/img/logo_Facebook.png" />
+                    <img  alt="page Facebook" src="./ui/img/logo_Facebook.png" />
                 </a>
                 <a href="#">
                     <img alt="page Twitter" src="./ui/img/logo_Twitter.png" />
@@ -131,7 +136,7 @@ EOT;
     {
         $html = <<<EOT
             <div id="footer">
-                <a href="#">Mentions L&eacute;gales</a> <a href="#">Contact</a>
+                <a href="#">Mentions L&eacute;gales</a> - <a href="#">Contact</a>
             </div>
 EOT;
         return $html;

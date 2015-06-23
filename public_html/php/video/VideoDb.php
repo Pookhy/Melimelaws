@@ -127,9 +127,9 @@ class VideoDb {
             $results = $statement->fetchAll(\PDO::FETCH_ASSOC);
             var_dump($results);
             foreach ($results as $result) {
-                //$videos[] = Video::initialize($result);
+                $videos[] = Video::initialize($result);
                 //$videos[] = isset($result) ? Video::initialize($result) : Video::initialize();
-                $videos[] = isset($result['id_video']) ? Video::initialize($result) : Video::initialize(array());
+                //$videos[] = isset($result['id_video']) ? Video::initialize($result) : Video::initialize(array());
             }
             //var_dump($videos);
             return $videos;

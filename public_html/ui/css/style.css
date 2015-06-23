@@ -2,41 +2,69 @@ body{
 	background-color: #848484;
 }
 
+#logo{
+    width: 5%;
+}
+#tete{
+    background-color: yellow;
+    background-image:url(./ui/img/banniere.jpg);
+    background-image:url("./img/logo.jpg");
+    background-repeat:no-repeat;
+}
+
 iframe{
     width:560px;
     height:315px;
 } 
-
-.saison img{
-    width:150px;
-    height:150px;
-}
-
-.personne img{
-    width:300px;
-    height:150px;
-}
-
+//                                                                          MENU
 #mainMenu{
-	background-color: #BDBDBD;
+    background-color: #BDBDBD;
 }
 
 #mainMenu ul li{
     display:inline-block;
 }
+ul {
+    padding:0;
+    margin:0;
+    list-style-type:none;
+}
+li {
+    float:left; /*pour IE*/
+    border-left:1px solid black;
+ }
+ul li a {
+    display:block;
+    float:left;   
+    width:100px;
+    background-color: #BDBDBD ;
+    color:black;
+    text-decoration:none;
+    text-align:center;
+ }
+ul li a:hover {
+    background-color:#FF0040;
+    color:white;
+ }  
 
+
+
+//                                                                RESEAU SOCIAUX
 #lien img{
-    display:none
+    display: none;
+    
+}
+.RS img{
+    width: 15px;
+    height: 15px;
 }
 
-#logo{
-    width: 5%;
-}
+//                                                                       CONTENU
 
 #contenu{
-	background-color: #FF0040;
-	float: left;
-	width: 80%;
+    background-color: #FF0040;
+    float: left;
+    width: 80%;
 }
 
 #messages{
@@ -49,9 +77,65 @@ iframe{
     border: solid 1px black;
 }
 
+.video{
+    //alignment-adjust: middle;
+    width : 50%; 
+    margin : auto; 
+    text-align: center;
+}
+
+.personne img{
+    width:300px;
+    height:150px;
+}
+
+.saison img{
+    width:150px;
+    height:150px;
+}
+
+//                                                                        FOOTER
 #footer{
     clear: both;
     background-color: #000000;
     text-align: center;
     color: white;
+    
+    position:fixed;
+    bottom:0;
+    left:0;
+    width: 100%;
+}
+#footer a
+{
+   text-decoration: none;
+   color: white;
+}
+
+
+//                                                                       TABLEAU
+table
+{
+    border-collapse:collapse;
+    text-align:center;
+}
+
+caption
+{
+    caption-side:top;
+    font-weight:bold;
+    font-style:italic;
+    margin:4px;
+}
+
+table,th, td
+{
+    border: 1px solid black;
+}
+
+th, td
+{
+    height: 24px;
+    //padding:4px;
+    vertical-align:middle;
 }

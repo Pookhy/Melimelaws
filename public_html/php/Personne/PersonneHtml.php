@@ -40,16 +40,18 @@ EOT;
     public static function displayChoixTypePersonne() {
         $html = '<div id="contenu">';
         $html .= <<<EOT
-            <div class="personne">
+            <div class="choixpersonne">
                
                 <a href="index.php?t=Personne&action=allEquipe" >
-                    <img alt="" src="http://www.vaceva.com/v2/img/rubriques/equipe.jpg"/>
+                    <img alt="Qui sommes nous ?" src="http://www.vaceva.com/v2/img/rubriques/equipe.jpg"/>
+                    <br/>
                     Qui sommes nous ?
                 </a>
                 
                 
                 <a href="index.php?t=Personne&action=allGuest" >
-                    <img alt="" src="http://www.searchmarketingstandard.com/wp-content/uploads/2013/04/WelcomeGuestsshutterstock_10730578.jpg"/>
+                    <img alt="Qui sont-ils ?" src="http://www.searchmarketingstandard.com/wp-content/uploads/2013/04/WelcomeGuestsshutterstock_10730578.jpg"/>
+                    <br/>                 
                     Qui sont-ils ?
                 </a>
 

@@ -13,10 +13,12 @@
         <header>
             <?php echo $infos->getPart("header"); ?>
         </header>
-        <div>
-            <?php echo $infos->getPart('content'); ?>
+        <div id='corps'>
+            <div id='contenu'>
+                <?php echo $infos->getPart('content'); ?>
+            </div>
+            <div id="messages">      </div>
         </div>
-        <div id="messages">      </div>
         <footer>
             <?php echo $infos->getPart("footer");?>
         </footer>

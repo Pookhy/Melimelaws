@@ -40,22 +40,24 @@ EOT;
 
             <div id="tete">
                 <a href="./">
-                    <img id="logo" alt="accueil" src="./ui/img/logo.jpg" />
+                    <img id="baniere" alt="accueil" src="./ui/img/banniere.jpg" />
                 </a>
             </div>
             <nav id="mainMenu">
                 <ul>
                     <li>
-                    <a href="index.php">Accueil</a>
+                        <a href="index.php">
+                            Accueil
+                        </a>
                     </li>
                     <li>
-                    <a href="index.php?t=saison&action=allSaisons">Vid&eacute;os</a>
+                        <a href="index.php?t=saison&action=allSaisons">Vid&eacute;os</a>
                     </li>
                     <li>
-                    <a href="index.php?t=personne&action=diffEquipe">&Eacute;quipe</a>
+                        <a href="index.php?t=personne&action=diffEquipe">&Eacute;quipe</a>
                     </li>
                     <li>
-                    <a href="index.php?t=display&action=contact">Contact</a>
+                        <a href="index.php?t=display&action=contact">Contact</a>
                     </li>
                 </ul>
             </nav>
@@ -63,18 +65,18 @@ EOT;
         }
         $html .= <<<EOT
                          
-            <div id="lien" class="RS">
+            <div id="lien">
                 <a href="#">
-                    <img  alt="page Facebook" src="./ui/img/logo_Facebook.png" />
+                    <img class="RS" alt="page Facebook" src="./ui/img/logo_Facebook.png" />
                 </a>
                 <a href="#">
-                    <img alt="page Twitter" src="./ui/img/logo_Twitter.png" />
+                    <img class="RS" alt="page Twitter" src="./ui/img/logo_Twitter.png" />
                 </a>
                 <a href="#">
-                    <img alt="page Ullule" src="./ui/img/logo_Ullule.png" />
+                    <img class="RS" alt="page Ullule" src="./ui/img/logo_Ullule.png" />
                 </a>
                 <a href="#">
-                    <img alt="page Youtube" src="./ui/img/logo_Youtube.png" />
+                    <img class="RS" alt="page Youtube" src="./ui/img/logo_Youtube.png" />
                 </a>
             </div>
 EOT;
@@ -126,18 +128,11 @@ EOT;
         $html .='</div>';
         return $html;
     }
-    
-    public static function displayRight()
-    {
-        //
-    }
 
     public static function displayFooter()
     {
         $html = <<<EOT
-            <div id="footer">
-                <a href="#">Mentions L&eacute;gales</a> - <a href="#">Contact</a>
-            </div>
+           <a href="#">Mentions L&eacute;gales</a> - <a href="#">Contact</a>
 EOT;
         return $html;
     }

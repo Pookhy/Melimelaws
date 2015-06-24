@@ -26,11 +26,10 @@ EOT;
     }
 
     public static function displayVideos($videos) {
-        $html = '<div id="contenu">';
+        $html = "";
         foreach ($videos as $video) {
             $html .= self::displayVideo($video);
         }
-         $html .='</div>';
 
         return $html;
     }
@@ -38,7 +37,7 @@ EOT;
     //ADMIN
     
     public static function displayAdminVideos($videos) {
-        $html = "<div id='contenu'>";
+        $html = "";
         $html .= <<<EOT
         <table>
             <caption>Table Vidéo</caption>
@@ -88,14 +87,13 @@ EOT;
         $html .= "</table>";
         $html .= "<br/>";
         $html .= "<a href='index.php?t=Video&action=formInsertVideo' alt='Ajouter Video'>Ajouter</a>";
-        $html .= "</div>";
         return $html;
     }
 
     public static function displayInsertVideo($saisons) {
         //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
 
-        $html = "<div id='contenu'>";
+        $html = "";
         $html .= <<<EOT
             <div class="insert">
                 <form action ="./index.php?t=video&action=insertVideo" method="post">
@@ -141,14 +139,13 @@ EOT;
                 </form>
             </div>
 EOT;
-        $html .= "</div>";
         return $html;
     }
     
     public static function displayFormUpdateVideo($video, $saisons) {
         //($id, $num, $titre, $description, $adresse, $type, $accueil, $idSaison);
  
-        $html = "<div id='contenu'>";
+        $html = "";
         $html .= <<<EOT
             <div class="Modification">
                 <form action ="./index.php?t=video&action=updateVideo" method="post">
@@ -217,7 +214,7 @@ EOT;
                 </form>
             </div>
 EOT;
-        $html .= "</div>";
+
         return $html;
     }
 }
